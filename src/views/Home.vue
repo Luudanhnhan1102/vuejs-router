@@ -20,10 +20,7 @@
               params: { slug: destination.slug }
             }"
           >
-            <img
-              :src="require(`@/assets/${destination.image}`)"
-              :alt="destination.name"
-            />
+            <img :src="require(`@/assets/${destination.image}`)" :alt="destination.name" />
           </router-link>
         </figure>
       </div>
@@ -33,16 +30,16 @@
 
 <script>
 // @ is an alias to /src
-import store from "@/store.js";
+import store from '@/store.js'
 export default {
-  name: "home",
+  name: 'Home',
   components: {},
   data() {
     return {
       destinations: store.destinations
-    };
+    }
   }
-};
+}
 </script>
 <style scoped>
 .home {

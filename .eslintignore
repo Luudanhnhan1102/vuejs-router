@@ -1,0 +1,7 @@
+build
+dist
+node_module
+src/assets
+public
+dist
+# apps

@@ -9,22 +9,22 @@
         >Invoices</router-link
       >
     </p>
-    <button @click="logOut" class="btn">Log out</button>
+    <button class="btn" @click="logOut">Log out</button>
   </div>
 </template>
 <script>
-import store from "@/store";
+import store from '@/store'
 export default {
   data() {
     return {
       user: store.user
-    };
+    }
   },
   methods: {
     logOut() {
-      store.user = null;
-      this.$router.push("/");
+      store.user = null
+      this.$router.push('/')
     }
   }
-};
+}
 </script>

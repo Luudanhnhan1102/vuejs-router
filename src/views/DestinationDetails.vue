@@ -6,21 +6,14 @@
         {{ destination.name }}
       </h1>
       <div class="destination-details">
-        <img
-          :src="require(`@/assets/${destination.image}`)"
-          :alt="destination.name"
-        />
+        <img :src="require(`@/assets/${destination.image}`)" :alt="destination.name" />
         <p>{{ destination.description }}</p>
       </div>
     </section>
     <section class="experiences">
       <h2>Top experiences in {{ destination.name }}</h2>
-      <div class="cards" id="experience">
-        <div
-          v-for="experience in destination.experiences"
-          :key="experience.slug"
-          class="card"
-        >
+      <div id="experience" class="cards">
+        <div v-for="experience in destination.experiences" :key="experience.slug" class="card">
           <router-link
             :to="{
               name: 'experienceDetails',
@@ -28,10 +21,7 @@
               hash: '#experience'
             }"
           >
-            <img
-              :src="require(`@/assets/${experience.image}`)"
-              :alt="experience.name"
-            />
+            <img :src="require(`@/assets/${experience.image}`)" :alt="experience.name" />
             <span class="card__text">
               {{ experience.name }}
             </span>
@@ -43,14 +33,11 @@
   </div>
 </template>
 <script>
-import store from "@/store";
-import GoBack from "@/components/GoBack";
+import store from '@/store'
+import GoBack from '@/components/GoBack'
 export default {
   components: {
     GoBack
-  },
-  data() {
-    return {};
   },
   props: {
     slug: {
@@ -58,14 +45,15 @@ export default {
       required: true
     }
   },
+  data() {
+    return {}
+  },
   computed: {
     destination() {
-      return store.destinations.find(
-        destination => destination.slug === this.slug
-      );
+      return store.destinations.find(destination => destination.slug === this.slug)
     }
   }
-};
+}
 </script>
 
 <style scoped>
