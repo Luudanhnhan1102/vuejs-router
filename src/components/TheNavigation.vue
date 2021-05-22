@@ -7,11 +7,7 @@
           Home
         </router-link>
       </li>
-      <li
-        v-for="destination in destinations"
-        :key="destination.name"
-        class="links"
-      >
+      <li v-for="destination in destinations" :key="destination.name" class="links">
         <router-link
           :to="{
             name: 'DestinationDetails',
@@ -29,14 +25,14 @@
 </template>
 
 <script>
-import store from "@/store";
+import store from '@/store'
 export default {
   data() {
     return {
       destinations: store.destinations
-    };
+    }
   }
-};
+}
 </script>
 
 <style scoped>

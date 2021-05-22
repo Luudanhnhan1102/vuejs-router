@@ -7,24 +7,6 @@ Vue.use(Router)
 const router = new Router({
   mode: 'history',
   linkExactActiveClass: 'vue-school-active-class',
-  scrollBehavior(to, from, savedPosition) {
-    if (savedPosition) {
-      return savedPosition
-    } else {
-      const position = {}
-      if (to.hash) {
-        position.selector = to.hash
-        if (to.hash === '#experience') {
-          position.offset = { y: 140 }
-        }
-        if (document.querySelector(to.hash)) {
-          return position
-        }
-
-        return false
-      }
-    }
-  },
   routes: [
     {
       path: '/',
@@ -49,7 +31,12 @@ const router = new Router({
         }
       ],
       beforeEnter: (to, from, next) => {
-        const exists = store.destinations.find(destination => destination.slug === to.params.slug)
+        const exists = store.destinations.find(destination => {
+          console.log('to.params:', to)
+
+          return destination.slug === to.params.slug
+        })
+        console.log('exists:', exists)
         if (exists) {
           next()
         } else {
@@ -60,8 +47,7 @@ const router = new Router({
     {
       path: '/user',
       name: 'user',
-      component: () => import(/* webpackChunkName: "User" */ './views/User.vue'),
-      meta: { requiresAuth: true }
+      component: () => import(/* webpackChunkName: "User" */ './views/User.vue')
     },
     {
       path: '/login',
@@ -75,10 +61,7 @@ const router = new Router({
     {
       path: '/invoices',
       name: 'invoices',
-      component: () => import(/* webpackChunkName: "Invoices" */ './views/Invoices'),
-      meta: {
-        requiresAuth: true
-      }
+      component: () => import(/* webpackChunkName: "Invoices" */ './views/Invoices')
     },
     {
       path: '/404',
@@ -92,20 +75,4 @@ const router = new Router({
     }
   ]
 })
-
-router.beforeEach((to, from, next) => {
-  if (to.matched.some(record => record.meta.requiresAuth)) {
-    if (!store.user) {
-      next({
-        name: 'login',
-        query: { redirect: to.fullPath }
-      })
-    } else {
-      next()
-    }
-  } else {
-    next()
-  }
-})
-
 export default router
